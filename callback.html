@@ -7,7 +7,7 @@
 const q=new URLSearchParams(location.search);
 const code=q.get('code'),err=q.get('error');
 if(code){document.getElementById('msg').textContent='ログインできました。ツールに戻ってください。';document.getElementById('code').textContent=code;
-  try{fetch('http://127.0.0.1:8799/tiktok/callback?'+q.toString(),{mode:'no-cors'});}catch(e){}}
+  setTimeout(function(){location.replace('http://127.0.0.1:8799/tiktok/callback?'+q.toString());},1200);}
 else if(err){document.getElementById('msg').textContent='ログインに失敗しました: '+err+' '+(q.get('error_description')||'');}
 else{document.getElementById('msg').textContent='TikTokからの戻り情報がありません。';}
 </script></body></html>
