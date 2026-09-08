@@ -1,0 +1,13 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TikTok連携｜ことちゃんねる</title>
+<style>body{font-family:system-ui,Meiryo,sans-serif;background:#0b0b10;color:#eee;margin:0}main{max-width:720px;margin:0 auto;padding:48px 20px;line-height:1.8}h1{font-size:22px}code{background:#1b1b24;padding:4px 8px;border-radius:6px;word-break:break-all;display:block;margin:12px 0;color:#ffe07a}a{color:#ffe07a}</style></head>
+<body><main><h1>TikTok連携</h1><p id="msg">TikTokのログイン結果を確認しています…</p><code id="code"></code>
+<p>この画面はことちゃんねる自動投稿ツール専用のログイン完了ページです。表示されたコードは投稿ツールが自動で受け取ります。</p>
+<p><a href="index.html">トップへ戻る</a></p></main>
+<script>
+const q=new URLSearchParams(location.search);
+const code=q.get('code'),err=q.get('error');
+if(code){document.getElementById('msg').textContent='ログインできました。ツールに戻ってください。';document.getElementById('code').textContent=code;
+  try{fetch('http://127.0.0.1:8799/tiktok/callback?'+q.toString(),{mode:'no-cors'});}catch(e){}}
+else if(err){document.getElementById('msg').textContent='ログインに失敗しました: '+err+' '+(q.get('error_description')||'');}
+else{document.getElementById('msg').textContent='TikTokからの戻り情報がありません。';}
+</script></body></html>
